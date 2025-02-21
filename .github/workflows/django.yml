@@ -23,17 +23,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
 
         
-    - name: Python - VENV - Poetry
-  # You may pin to the exact commit or the version.
-  # uses: DarylStark/actions-python-venv-poetry@a7b7c59338aedeaf29d647addebf2af14c16df22
-  uses: DarylStark/actions-python-venv-poetry@v1
-  with:
-    # The version of Python to use.
-    python-version: # optional, default is 3.12
-    # They key to use for the caching of the VENV
-    cache-key: # optional, default is python-venv-poetry-${{ hashFiles('./poetry.lock') }}
-    # The groups of dependencies to install as comma seperated list.
-    groups: # optional
+ 
           
     - name: Install Dependencies
       run: |
