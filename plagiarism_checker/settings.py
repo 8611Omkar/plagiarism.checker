@@ -81,17 +81,21 @@ DATABASES = {
     }
 }
 
+
 import os
 
-STATIC_URL = 'checker/static/'
-STATIC_URL = '/checker/templates/'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "checker", "static")]  # Add checker/static path
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # Collects static files for production
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),  # Check if this directory exists
-]
+
+
+# STATIC_URL = '/checker/static/'
+# STATIC_URL = '/checker/templates/'
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
