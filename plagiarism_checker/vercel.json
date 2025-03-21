@@ -1,0 +1,13 @@
+{
+  "builds": [{
+  "src": "plagiarism_checker/wsgi.py",
+  "use": "@vercel/python",
+  "config":"maxLambdaSize": "100mb", "runtime": "python3.9" }
+  }],
+  "routes":[
+    {
+    "src": "/(.*)",
+    "dest": "plagiarism_checker/wsgi.py"
+    }
+  ]
+ }
