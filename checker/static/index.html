@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Page Plagiarism Checker</title>
+</head>
+<body>
+
+    <h2>Plagiarism Checker for HTML Pages</h2>
+
+    <label>Upload HTML File 1:</label>
+    <input type="file" id="file1" accept=".html"><br><br>
+
+    <label>Upload HTML File 2:</label>
+    <input type="file" id="file2" accept=".html"><br><br>
+
+    <button onclick="checkPlagiarism()">Check Plagiarism</button>
+
+    <h3>Result:</h3>
+    <p id="result"></p>
+
+    <script>
+        function readFile(file, callback) {
+            let reader = new FileReader();
+            reader.onload = function () {
+                callback(reader.result);
+            };
+            reader.readAsText(file);
+        }
+
+        function checkPlagiarism() {
+            let file1 = document.getElementById("file1").files[0];
+            let file2 = document.getElementById("file2").files[0];
+
+            if (!file1 || !file2) {
+                alert("Please upload both files.");
+                return;
+            }
+
+            readFile(file1, function (text1) {
+                readFile(file2, function (text2) {
+                    let formData = new FormData();
+                    formData.append("text1", text1);
+                    formData.append("text2", text2);
+
+                    fetch("check_plagiarism.php", {
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("result").innerText = "Plagiarism Score: " + data + "%";
+                    });
+                });
+            });
+        }
+    </script>
+
+</body>
+</html>
